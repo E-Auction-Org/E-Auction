@@ -24,21 +24,6 @@ public class EAuctionPersistence implements edu.eci.eauction.service.persistence
     private final ConcurrentHashMap<Tuple<String,String>, Auction> auctions =new ConcurrentHashMap<>();
 
     public EAuctionPersistence() {
-        //load stub data
-        Point[] pts=new Point[]{new Point(140, 140),new Point(115, 115)};
-        Point[] pts1=new Point[]{new Point(0, 0),new Point(10, 11)};
-        Auction bp=new Auction("_authorname_", "_bpname_",pts);
-        Auction bp1=new Auction("pedro","casa38", pts1);
-        Auction bp2=new Auction("juan","casa39", pts1);
-        Auction bp3=new Auction("pedro","casa40", pts1);
-        Auction bp4=new Auction("pedro","casa41", pts1);
-        Auction bp5=new Auction("juan","casa42", pts1);
-        auctions.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
-        auctions.put(new Tuple<>(bp1.getAuthor(),bp1.getName()), bp1);
-        auctions.put(new Tuple<>(bp2.getAuthor(),bp2.getName()), bp2);
-        auctions.put(new Tuple<>(bp3.getAuthor(),bp3.getName()), bp3);
-        auctions.put(new Tuple<>(bp4.getAuthor(),bp4.getName()), bp4);
-        auctions.put(new Tuple<>(bp5.getAuthor(),bp5.getName()), bp5);
     }
 
     @Override
