@@ -1,58 +1,81 @@
 
 package edu.eci.eauction.service.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.*;
 
+@Document(collection="auctions")
 public class Auction {
 
-    private String author=null;
+    @Id
+    private String id;
+
+    private String creator=null;
     
-    private List<Point> points=null;
-    
-    private String name=null;
-            
-    public Auction(String author, String name, Point[] pnts){
-        this.author=author;
-        this.name=name;
-        points=Arrays.asList(pnts);
-    }
-         
-    public Auction(String author, String name){
-        this.name=name;
-        this.author=author;
-        points=new ArrayList<>();
+    private int price;
+
+    private String name = null;
+
+    private Date start;
+
+    private int duration;
+
+    public Auction(String creator, int price, String name, Date start, int duration) {
+        this.creator = creator;
+        this.price = price;
+        this.name = name;
+        this.start = start;
+        this.duration = duration;
     }
 
-    public Auction() {
-    }    
-    
+    public String getId() {
+        return id;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public Date getStart() {
+        return start;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
     public String getName() {
         return name;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-    
-    public List<Point> getPoints() {
-        return points;
+    public String getCreator() {
+        return creator;
     }
 
-    public void setPoints(List<Point> points) {
-        this.points = points;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void addPoint(Point p){
-        this.points.add(p);
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 
-    @Override
-    public String toString() {
-        return "Blueprint{" + "author=" + author + ", name=" + name + '}';
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStart(Date start) {
+        this.start = start;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     @Override
@@ -62,35 +85,22 @@ public class Auction {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Auction other = (Auction) obj;
-        if (!Objects.equals(this.author, other.author)) {
-            return false;
-        }
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (this.points.size()!=other.points.size()){
-            return false;
-        }
-        for (int i=0;i<this.points.size();i++){
-            if (this.points.get(i)!=other.points.get(i)){
-                return false;
-            }
-        }
-        
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Auction auction = (Auction) o;
+        return price == auction.price && duration == auction.duration && Objects.equals(id, auction.id) && Objects.equals(creator, auction.creator) && Objects.equals(name, auction.name) && Objects.equals(start, auction.start);
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Auction{" +
+                "id='" + id + '\'' +
+                ", creator='" + creator + '\'' +
+                ", price=" + price +
+                ", name='" + name + '\'' +
+                ", start=" + start +
+                ", duration=" + duration +
+                '}';
+    }
 }

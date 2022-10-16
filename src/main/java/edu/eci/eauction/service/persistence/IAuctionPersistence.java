@@ -7,19 +7,19 @@ package edu.eci.eauction.service.persistence;
 
 import edu.eci.eauction.service.model.Auction;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  *
- * @author hcadavid
+ * @author JuanRojasCastr & javier32rojas040506
  */
-public interface EAuctionPersistence {
+public interface IAuctionPersistence {
     /**
      * Method that search all the auctions
      * @return Set of auctions
      * @throws AuctionNotFoundException if there is no auctions
      */
-    public Set<Auction> getAuctions() throws AuctionNotFoundException;
+    public List<Auction> getAuctions() throws AuctionNotFoundException;
 
     /**
      * Method that search an auction for one user and id
@@ -36,14 +36,14 @@ public interface EAuctionPersistence {
      * @return Set of Auctions
      * @throws AuctionNotFoundException if there is no auctions
      */
-    public Set<Auction> getUserAuction(String user) throws AuctionNotFoundException;
+    public List<Auction> getUserAuction(String user) throws AuctionNotFoundException;
 
     /**
      * Method that save a given auction
      * @param auction the auction to be saved
      * @throws AuctionPersistenceException if the auction already exists
      */
-    public void postAuction(Auction auction) throws AuctionPersistenceException;
+    public String postAuction(Auction auction) throws AuctionPersistenceException;
 
     /**
      * Method that modify a given auction
@@ -52,7 +52,7 @@ public interface EAuctionPersistence {
      * @param auction auction
      * @throws AuctionPersistenceException if the auction doesn't exist
      */
-    public void putAuction(String user, String id , Auction auction) throws AuctionPersistenceException;
+    public Auction putAuction(String user, String id , Auction auction) throws AuctionPersistenceException;
 
     /**
      * Method that delete a given auction

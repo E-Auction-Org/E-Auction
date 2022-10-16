@@ -7,7 +7,7 @@ package edu.eci.eauction.service.persistence;
 
 /**
  *
- * @author JuanRojasCastr
+ * @author JuanRojasCastr & javier32rojas040506
  */
 public class AuctionPersistenceException extends Exception{
 
