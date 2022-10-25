@@ -11,64 +11,6 @@ var app = (function () {
     let auctions = null;
     var stompClient = null;
 
-    var addPointToCanvas = function (point) {        
-        var canvas = document.getElementById("canvas");
-        var ctx = canvas.getContext("2d");
-        ctx.strokeStyle = "black";
-        ctx.beginPath();
-        ctx.arc(point.x, point.y, 3, 0, 2 * Math.PI);
-        ctx.stroke();
-    };
-
-    const addLineToCanvas = (x0, y0, x1, y1) => {        
-          var canvas = document.getElementById("canvas");
-          var ctx = canvas.getContext("2d");
-          ctx.beginPath();
-          ctx.strokeStyle = "blue";
-          ctx.moveTo(x0, y0);
-          ctx.lineTo(x1, y1);
-          ctx.stroke();
-  }
-
-  const drawPolygon = (points, flag) => {
-          for (let i = 0; i < points.length; i++) {
-                    if (flag) addPointToCanvas(new Point(points[i].x, points[i].y));
-                    if(i < points.length - 1) {
-                              addLineToCanvas(points[i].x, points[i].y, points[i + 1].x, points[i + 1].y);
-                    }
-                    else addLineToCanvas(points[i].x, points[i].y, points[0].x, points[0].y);
-          }
-  };
-    
-    
-    var getMousePosition = function (evt) {
-        canvas = document.getElementById("canvas");
-        var rect = canvas.getBoundingClientRect();
-        return {
-            x: evt.clientX - rect.left,
-            y: evt.clientY - rect.top
-        };
-    };
-
-    let mouseEventListner = function () {
-          let elements = [];
-          let canvas = document.getElementById("canvas");
-          elemLeft = canvas.offsetLeft + canvas.clientLeft,
-          elemTop = canvas.offsetTop + canvas.clientTop,
-          canvas.addEventListener('click', function(event) {
-                    var x = event.pageX - elemLeft,
-                        y = event.pageY - elemTop;
-                
-                    // Collision detection between clicked offset and element.
-                    elements.forEach(function(element) {
-                              if (y > element.top && y < element.top + element.height 
-                                        && x > element.left && x < element.left + element.width) {
-                                        alert('clicked an element');
-                              }
-                    });
-                    app.publishPoint(x);
-          });
-    };
 
     let cleanCanvas = function () {
           var canvas = document.getElementById("canvas");
@@ -91,8 +33,6 @@ var app = (function () {
                     });
           });
     };
-    
-    
 
 return {
 
