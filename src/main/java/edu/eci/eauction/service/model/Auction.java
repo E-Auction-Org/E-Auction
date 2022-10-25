@@ -22,12 +22,15 @@ public class Auction {
 
     private int duration;
 
-    public Auction(String creator, int price, String name, Date start, int duration) {
+    private String url;
+
+    public Auction(String creator, int price, String name, Date start, int duration,  String url) {
         this.creator = creator;
         this.price = price;
         this.name = name;
         this.start = start;
         this.duration = duration;
+        this.url = url;
     }
 
     public String getId() {
@@ -78,6 +81,14 @@ public class Auction {
         this.duration = duration;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -89,7 +100,9 @@ public class Auction {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Auction auction = (Auction) o;
-        return price == auction.price && duration == auction.duration && Objects.equals(id, auction.id) && Objects.equals(creator, auction.creator) && Objects.equals(name, auction.name) && Objects.equals(start, auction.start);
+        return price == auction.price && duration == auction.duration && Objects.equals(id, auction.id) &&
+                Objects.equals(creator, auction.creator) && Objects.equals(name, auction.name) &&
+                Objects.equals(start, auction.start) && Objects.equals(url, auction.url);
     }
 
     @Override
@@ -101,6 +114,7 @@ public class Auction {
                 ", name='" + name + '\'' +
                 ", start=" + start +
                 ", duration=" + duration +
+                ", url=" + url +
                 '}';
     }
 }
