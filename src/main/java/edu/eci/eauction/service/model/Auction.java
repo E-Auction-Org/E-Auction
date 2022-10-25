@@ -1,13 +1,20 @@
 
 package edu.eci.eauction.service.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.*;
 
+@Getter
+@Setter
 @Document(collection="auctions")
 public class Auction {
+    @Transient
+    public static final String SEQUENCE_NAME = "users_sequence";
 
     @Id
     private String id;
@@ -24,68 +31,14 @@ public class Auction {
 
     private String url;
 
+    private int seq;
+
     public Auction(String creator, int price, String name, Date start, int duration,  String url) {
         this.creator = creator;
         this.price = price;
         this.name = name;
         this.start = start;
         this.duration = duration;
-        this.url = url;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public Date getStart() {
-        return start;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getCreator() {
-        return creator;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setStart(Date start) {
-        this.start = start;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
         this.url = url;
     }
 
@@ -100,7 +53,7 @@ public class Auction {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Auction auction = (Auction) o;
-        return price == auction.price && duration == auction.duration && Objects.equals(id, auction.id) &&
+        return price == auction.price && duration == auction.duration &&
                 Objects.equals(creator, auction.creator) && Objects.equals(name, auction.name) &&
                 Objects.equals(start, auction.start) && Objects.equals(url, auction.url);
     }

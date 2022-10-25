@@ -52,8 +52,9 @@ public class AuctionPersistence implements IAuctionPersistence {
 
     @Override
     public String postAuction(Auction auction) throws AuctionPersistenceException {
-        Optional<Auction> ac = atf.getAuction(auction.getId());
-        if (ac.isPresent()) throw new AuctionPersistenceException("Auction already exists");
+        if (atf.auctionExists(auction)) {
+            throw new AuctionPersistenceException("Auction already exists");
+        }
         return atf.postAuction(auction);
     }
 
