@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import nonapi.io.github.classgraph.json.Id;
 import org.checkerframework.common.aliasing.qual.Unique;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Objects;
@@ -13,6 +14,8 @@ import java.util.Objects;
 @Setter
 @Document(collection = "users")
 public class User {
+    @Transient
+    public static final String SEQUENCE_NAME = "users_sequence";
     @Id
     private String id;
     @Unique

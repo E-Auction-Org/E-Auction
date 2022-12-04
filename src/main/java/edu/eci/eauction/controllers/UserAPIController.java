@@ -7,7 +7,9 @@ package edu.eci.eauction.controllers;
 
 import edu.eci.eauction.service.model.Auction;
 import edu.eci.eauction.service.model.GenericResponse;
+import edu.eci.eauction.service.model.User;
 import edu.eci.eauction.service.services.AuctionServices;
+import edu.eci.eauction.service.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -20,5 +22,11 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 @RequestMapping(value = "v1/user")
 public class UserAPIController {
-    //public LoginUser
+
+    @Autowired
+    UserServices us;
+    @RequestMapping(path = "/register" ,method = RequestMethod.POST)
+    public GenericResponse<User> postUser(@RequestBody User user){;
+        return us.register(user);
+    }
 }
