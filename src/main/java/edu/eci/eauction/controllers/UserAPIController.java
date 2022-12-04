@@ -5,10 +5,7 @@
  */
 package edu.eci.eauction.controllers;
 
-import edu.eci.eauction.service.model.Auction;
-import edu.eci.eauction.service.model.GenericResponse;
-import edu.eci.eauction.service.model.Rating;
-import edu.eci.eauction.service.model.User;
+import edu.eci.eauction.service.model.*;
 import edu.eci.eauction.service.services.AuctionServices;
 import edu.eci.eauction.service.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +37,10 @@ public class UserAPIController {
     @PutMapping
     public GenericResponse<User> putUser(@RequestBody User user) {
         return us.putUser(user);
+    }
+
+    @RequestMapping(path = "/credits/add", method = RequestMethod.PUT)
+    public GenericResponse<Integer> addCreditsUser(@RequestBody Credits credits) {
+        return us.addCredits(credits.getId(), credits.getCredits());
     }
 }

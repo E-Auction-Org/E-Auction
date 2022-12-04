@@ -41,4 +41,13 @@ public class UserPersistence implements IUserPersistence {
         }
         else throw new UserPersistenceException("Something went wrong");
     }
+
+    @Override
+    public Integer addCredits(String id, int credits) throws UserPersistenceException {
+        Integer totalCredits = atf.addCredits(id, credits);
+        if (totalCredits.equals(-1)) {
+            throw new UserPersistenceException("Something went wrong");
+        }
+        else return totalCredits;
+    }
 }

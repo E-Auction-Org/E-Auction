@@ -25,4 +25,12 @@ public interface IUserPersistence {
      * @return updated rating
      */
     public User putUser(User user) throws UserPersistenceException;
+
+    /**
+     * Method add credits to an user
+     * @param id of the user
+     * @param credits to add
+     * @return total of user's credits
+     */
+    public Integer addCredits(String id, int credits) throws UserPersistenceException;
 }

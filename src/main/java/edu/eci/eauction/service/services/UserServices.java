@@ -49,13 +49,29 @@ public class UserServices {
     /**
      * Method that update an user
      * @param user new rate
-     * @return updated rating
+     * @return updated user
      */
     public GenericResponse<User> putUser(User user){
         try {
             List<User> updatedUser = new ArrayList<>();
             updatedUser.add(usp.putUser(user));
             return new GenericResponse<>(HttpStatus.OK, "successful", true, updatedUser);
+        } catch (UserPersistenceException e) {
+            return new GenericResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), false, null);
+        }
+    }
+
+    /**
+     * Method add credits to an user
+     * @param id of the user
+     * @param credits to add
+     * @return total of user's credits
+     */
+    public GenericResponse<Integer> addCredits(String id, int credits){
+        try {
+            List<Integer> newRating = new ArrayList<>();
+            newRating.add(usp.addCredits(id, credits));
+            return new GenericResponse<>(HttpStatus.OK, "successful", true, newRating);
         } catch (UserPersistenceException e) {
             return new GenericResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), false, null);
         }

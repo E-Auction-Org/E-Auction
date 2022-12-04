@@ -68,4 +68,16 @@ public class EAuctionUserArtefactory {
         userRepository.save(user);
         return user;
     }
+
+    public Integer addCredits(String id, int credits) {
+        Optional<User> user = getUser(id);
+        if (user.isPresent()) {
+            User myUser = user.get();
+            int myUserCredits = myUser.getCredits();
+            myUser.setCredits(myUserCredits + credits);
+            userRepository.save(myUser);
+            return myUser.getCredits();
+        }
+        return -1;
+    }
 }

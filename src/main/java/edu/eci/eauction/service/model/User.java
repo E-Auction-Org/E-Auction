@@ -27,8 +27,9 @@ public class User {
     private ArrayList<Float> rating = new ArrayList<>();
     @NonNull
     private String mail;
+    private int credits = 0;
 
-    public User(String id, String userName, @NonNull String password, String mail) {
+    public User(String id, String userName, @NonNull String password, @NonNull String mail) {
         this.id = id;
         this.userName = userName;
         this.password = password;
