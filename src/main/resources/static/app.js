@@ -1,12 +1,5 @@
 var app = (function () {
 
-    class Point{
-        constructor(x,y){
-            this.x=x;
-            this.y=y;
-        }        
-    }
-
     let connection = null;
     let auctions = null;
     var stompClient = null;

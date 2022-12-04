@@ -18,4 +18,11 @@ public class UserPersistence implements IUserPersistence {
         }
         return atf.registerUser(user);
     }
+
+    @Override
+    public Float putRating(String id, Float rate) throws UserPersistenceException {
+        Float newRating = atf.putRating(id, rate);
+        if (newRating == -1F) throw new UserPersistenceException("Something went wrong");
+        return newRating;
+    }
 }
