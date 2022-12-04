@@ -36,4 +36,9 @@ public class UserAPIController {
     public GenericResponse<Float> rateUser(@PathVariable String userId, @RequestBody Rating rate) {
         return us.rateUser(userId, rate.getRate());
     }
+
+    @PutMapping
+    public GenericResponse<User> putUser(@RequestBody User user) {
+        return us.putUser(user);
+    }
 }

@@ -7,6 +7,8 @@ import edu.eci.eauction.service.persistence.UserPersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserPersistence implements IUserPersistence {
     @Autowired
@@ -24,5 +26,19 @@ public class UserPersistence implements IUserPersistence {
         Float newRating = atf.putRating(id, rate);
         if (newRating == -1F) throw new UserPersistenceException("Something went wrong");
         return newRating;
+    }
+
+    @Override
+    public User putUser(User user) throws UserPersistenceException {
+        Optional<User> optionalUser = atf.getUser(user.getId());
+        if (optionalUser.isPresent()) {
+            User oldUser = optionalUser.get();
+            String newUserName = user.getUserName();
+            String newMail = user.getMail();
+            if (!newUserName.equals(oldUser.getUserName())) oldUser.setUserName(newUserName);
+            if (!newMail.equals(oldUser.getMail())) oldUser.setMail(newMail);
+            return atf.putUser(oldUser);
+        }
+        else throw new UserPersistenceException("Something went wrong");
     }
 }

@@ -35,7 +35,6 @@ public class UserServices {
      * @param id of the user
      * @param rate new rate
      * @return updated rating
-     * @throws UserPersistenceException if there is no auctions
      */
     public GenericResponse<Float> rateUser(String id, Float rate){
          try {
@@ -45,5 +44,20 @@ public class UserServices {
          } catch (UserPersistenceException e) {
             return new GenericResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), false, null);
          }
+    }
+
+    /**
+     * Method that update an user
+     * @param user new rate
+     * @return updated rating
+     */
+    public GenericResponse<User> putUser(User user){
+        try {
+            List<User> updatedUser = new ArrayList<>();
+            updatedUser.add(usp.putUser(user));
+            return new GenericResponse<>(HttpStatus.OK, "successful", true, updatedUser);
+        } catch (UserPersistenceException e) {
+            return new GenericResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), false, null);
+        }
     }
 }

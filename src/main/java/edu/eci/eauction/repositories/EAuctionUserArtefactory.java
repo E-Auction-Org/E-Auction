@@ -63,4 +63,9 @@ public class EAuctionUserArtefactory {
         }
         return -1F;
     }
+
+    public User putUser(User user) {
+        userRepository.save(user);
+        return user;
+    }
 }
