@@ -33,4 +33,11 @@ public interface IUserPersistence {
      * @return total of user's credits
      */
     public Integer addCredits(String id, int credits) throws UserPersistenceException;
+
+    /**
+     * Method to get a user
+     * @param id of the user
+     * @return the user
+     */
+    public User getUser(String id) throws UserNotFoundException;
 }

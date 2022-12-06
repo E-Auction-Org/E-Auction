@@ -3,6 +3,7 @@ package edu.eci.eauction.service.services;
 import edu.eci.eauction.service.model.GenericResponse;
 import edu.eci.eauction.service.model.User;
 import edu.eci.eauction.service.persistence.IUserPersistence;
+import edu.eci.eauction.service.persistence.UserNotFoundException;
 import edu.eci.eauction.service.persistence.UserPersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -73,6 +74,21 @@ public class UserServices {
             newRating.add(usp.addCredits(id, credits));
             return new GenericResponse<>(HttpStatus.OK, "successful", true, newRating);
         } catch (UserPersistenceException e) {
+            return new GenericResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), false, null);
+        }
+    }
+
+    /**
+     * Method to get a user
+     * @param id of the user
+     * @return the user
+     */
+    public GenericResponse<User> getUser(String id){
+        try {
+            List<User> userList = new ArrayList<>();
+            userList.add(usp.getUser(id));
+            return new GenericResponse<>(HttpStatus.OK, "successful", true, userList);
+        } catch (UserNotFoundException e) {
             return new GenericResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), false, null);
         }
     }

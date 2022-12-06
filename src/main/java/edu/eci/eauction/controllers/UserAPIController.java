@@ -43,4 +43,9 @@ public class UserAPIController {
     public GenericResponse<Integer> addCreditsUser(@RequestBody Credits credits) {
         return us.addCredits(credits.getId(), credits.getCredits());
     }
+
+    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+    public GenericResponse<User> getUser(@PathVariable String id) {
+        return us.getUser(id);
+    }
 }

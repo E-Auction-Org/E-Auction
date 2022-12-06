@@ -3,6 +3,7 @@ package edu.eci.eauction.service.persistence.impl;
 import edu.eci.eauction.repositories.EAuctionUserArtefactory;
 import edu.eci.eauction.service.model.User;
 import edu.eci.eauction.service.persistence.IUserPersistence;
+import edu.eci.eauction.service.persistence.UserNotFoundException;
 import edu.eci.eauction.service.persistence.UserPersistenceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,5 +50,12 @@ public class UserPersistence implements IUserPersistence {
             throw new UserPersistenceException("Something went wrong");
         }
         else return totalCredits;
+    }
+
+    @Override
+    public User getUser(String id) throws UserNotFoundException {
+        Optional<User> userOption = atf.getUser(id);
+        if (userOption.isPresent()) return userOption.get();
+        else throw new UserNotFoundException("User doesn't exist");
     }
 }
