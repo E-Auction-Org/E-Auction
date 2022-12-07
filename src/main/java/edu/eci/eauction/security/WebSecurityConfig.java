@@ -37,7 +37,7 @@ public class WebSecurityConfig {
         return http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/v1/user/register", "/login")
+                .antMatchers("/v1/user/register", "/login", "/auction/*", "/stompendpoint", "/topic")
                 .permitAll()
                 .and()
                 .authorizeRequests()
@@ -53,7 +53,7 @@ public class WebSecurityConfig {
                 .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
                 .cors().configurationSource(request -> {
                     CorsConfiguration cors = new CorsConfiguration();
-                    cors.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://127.0.0.1:3000", "*"));
+                    cors.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://127.0.0.1:3000"));
                     cors.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE", "OPTIONS"));
                     cors.setAllowedHeaders(Arrays.asList("*"));
                     return cors;
